@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+<h1>Your Cart</h1>
+<div th:if="${cart.items.isEmpty()}">
+    <p>Your cart is empty</p>
+</div>
+<div th:each="item : ${cart.items}">
+    <p th:text="${item.title}">Item Title</p>
+    <p>Type: <span th:text="${item.itemType}"></span></p>
+    <p>Price: $<span th:text="${item.price}"></span></p>
+    <form method="post" th:action="@{/cart/remove}">
+        <input type="hidden" name="cartItemId" th:value="${item.id}" />
+        <button type="submit">Remove</button>
+    </form>
+</div>
+<!--<p>Total: <span th:text="${#numbers.formatDecimal(cart.items.stream().mapToDouble(i -> i.price * i.quantity).sum(), 0, 2)}"></span></p>
+--></body>
+</html>

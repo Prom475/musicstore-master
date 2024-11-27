@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .custom-form {
+            width: 300px;
+            padding: 25px;
+            background-color: #161616;
+            box-shadow: 0px 15px 60px #00FF7F;
+            outline: 1px solid #2b9962;
+            border-radius: 10px;
+            margin: 90px auto;
+            position: relative;
+        }
+
+        .welcome-text {
+            text-align: center;
+            line-height: 1;
+            margin-bottom: 40px;
+        }
+
+        .brand-name {
+            color: #00FF7F;
+            font-weight: 600;
+            font-size: 40px;
+        }
+
+        .welcome-message {
+            color: #ffffff;
+            font-size: 18px;
+            margin-top: 17px;
+        }
+
+        .form-control {
+            background: transparent;
+            border: 1px solid #e3e3e3;
+            color: #00FF7F;
+            padding: 11px 25px;
+            margin-bottom: 15px;
+        }
+
+        .form-control:focus {
+            background: transparent;
+            border-color: #00FF7F;
+            box-shadow: none;
+            color: #00FF7F;
+        }
+
+        .form-control::placeholder {
+            color: #868686;
+        }
+
+        .btn-custom {
+            width: 100%;
+            color: #00FF7F;
+            background-color: transparent;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 14px;
+            border: 0;
+            outline: 1px solid #00FF7F;
+            border-radius: 8px;
+            transition: all ease-in-out .3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #00FF7F;
+            color: #161616;
+        }
+
+        .register-link {
+            color: #00FF7F;
+            text-decoration: none;
+            transition: all ease-in-out .3s;
+        }
+
+        .register-link:hover {
+            color: #ffffff;
+        }
+
+        .decorative-bar {
+            position: absolute;
+            left: 50%;
+            bottom: -50px;
+            width: 28px;
+            height: 8px;
+            background-color: #00FF7F;
+            border-radius: 10px;
+            transform: translateX(-50%);
+        }
+
+        .decorative-bar:before,
+        .decorative-bar:after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ececec;
+            border-radius: 50%;
+        }
+
+        .decorative-bar:before {
+            right: -20px;
+        }
+
+        .decorative-bar:after {
+            right: -38px;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="custom-form">
+        <div th:if="${param.error}" class="alert alert-danger">
+            Invalid Email or Password!
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            You have been logged out!
+        </div>
+
+        <div class="welcome-text">
+            <div class="brand-name">Melodify</div>
+            <div class="welcome-message">Welcome Back 👋</div>
+        </div>
+
+        <form method="post" th:action="@{/login}">
+            <div class="mb-3">
+                <input
+                        class="form-control"
+                        id="username"
+                        name="username"
+                        placeholder="Email Address"
+                        type="email"
+                        required
+                >
+            </div>
+            <div class="mb-3">
+                <input
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        required
+                >
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-custom mb-3" type="submit">Login</button>
+                <div class="text-center">
+                    <a class="register-link" th:href="@{/registration}">Register</a>
+                </div>
+            </div>
+        </form>
+        <div class="decorative-bar"></div>
+    </div>
+</div>
+
+<script crossorigin="anonymous"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

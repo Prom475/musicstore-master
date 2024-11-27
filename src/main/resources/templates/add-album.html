@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Album - Melodify Music Store</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #161616;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00FF7F;
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        form {
+            background-color: #161616;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 255, 127, 0.1);
+        }
+
+        label {
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #2b2b2b;
+            border: 1px solid #00FF7F;
+            border-radius: 5px;
+            color: #ffffff;
+        }
+
+        input[type="submit"] {
+            background-color: #00FF7F;
+            color: #161616;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #161616;
+            color: #00FF7F;
+        }
+
+        footer {
+            background-color: #161616;
+            color: #b0b0b0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .debug-info {
+            margin-bottom: 20px;
+            color: #00FF7F;
+            font-size: 1.2em;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Spokyfy Music Store - Add New Album</h1>
+</header>
+
+<div class="container">
+    <!-- Display the artistId temporarily for debugging -->
+    <div class="debug-info">
+        <strong>Artist ID: </strong><span th:text="${artistId}"></span>
+    </div>
+
+    <!-- Form to add a new album -->
+    <form th:action="@{/albums}" method="POST">
+        <!-- Hidden input field for artistId -->
+        <input type="hidden" id="artistId" name="artistId" th:value="${artistId}">
+
+        <label for="title">Album Title</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="genre">Genre</label>
+        <input type="text" id="genre" name="genre" required>
+
+        <label for="releaseDate">Release Date</label>
+        <input type="date" id="releaseDate" name="releaseDate" required>
+
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" required step="0.01">
+
+        <label for="coverImage">Cover Image URL</label>
+        <input type="text" id="coverImage" name="coverImage" required>
+
+        <input type="submit" value="Add Album">
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Melodify Music Store. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
