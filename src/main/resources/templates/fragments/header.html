@@ -1,32 +1,48 @@
-<header th:fragment="header">
-    <h1>SPoPify Albums</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melodify Music Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark mb-3">
-        <a class="navbar-brand" th:href="@{/files}">
-            BezKoder
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="topNavbar">
-            <ul class="navbar-nav">
-                <nav>
-                    <ul>
-                        <li><a th:href="@{/files}">Files</a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <ul>
-                        <li><a th:href="@{/categories}">Categories</a></li>
-                    </ul>
-                </nav>
-                <nav>
-                    <ul>
-                        <li><a th:href="@{/artists}">Artists</a></li>
 
-                    </ul>
-                </nav>
-            </ul>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Melodify Music Store</h1>
         </div>
-    </nav>
-</header>
+        <nav>
+            <ul>
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a th:href="@{/artists}"><i class="fas fa-music"></i> Artists</a></li>
+                <li><a href="/shoppingCart"><i class="fas fa-shopping-cart"></i> Cart <span class="cart-count" th:text="${itemCount}"></span></a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="user-info" sec:authorize="isAuthenticated()">
+            <span>Hello, <span sec:authentication="name"></span>!</span>
+        </div>
+    <div class="search-container">
+    <form th:action="@{/search/songs}" method="get">
+        <input type="text" name="query" class="search-bar" placeholder="Search for songs...">
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+    </form>
+</div>
+    </header>
+</body>
+</html>

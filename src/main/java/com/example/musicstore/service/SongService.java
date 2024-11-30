@@ -13,6 +13,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Service
 public class SongService {
@@ -59,5 +62,13 @@ public class SongService {
     public void editSong(Long songId) {
         songRepository.findById(songId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid song ID"));
+    }
+
+    public Optional<Song> findById(Long productId) {
+        return songRepository.findById(productId);
+    }
+
+    public List<Song> searchSongs(String keyword) {
+        return songRepository.findByTitleContainingIgnoreCase(keyword);
     }
 }

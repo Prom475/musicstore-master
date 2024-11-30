@@ -5,10 +5,8 @@ import com.example.musicstore.model.Artist;
 import com.example.musicstore.model.User;
 import com.example.musicstore.repository.AlbumRepository;
 import com.example.musicstore.repository.ArtistRepository;
-import com.example.musicstore.repository.CartRepository;
 import com.example.musicstore.repository.UserRepository;
 import com.example.musicstore.service.AlbumService;
-import com.example.musicstore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,8 +28,7 @@ public class AlbumController {
     private ArtistRepository artistRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private CartService cartService;
+
 
     // Get all albums
     @GetMapping("/")
@@ -47,6 +44,12 @@ public class AlbumController {
         model.addAttribute("album", new Album());
         return "add-album";
     }
+//    @GetMapping("/albums/add")
+//    public String showAddAlbumForm( Model model) {
+//        model.addAttribute("album", new Album());
+//        model.addAttribute("artists", artistRepository.findAll());
+//        return "add-albumAndArtist";
+//    }
 
     // Save the album
     @PostMapping("/albums")
@@ -93,11 +96,6 @@ public class AlbumController {
 
         return "redirect:/albums?artistId=" + artistId;  // Redirect to the album list for the artist
     }
-    @PostMapping("/cart/{userId}/add-album")
-    public ResponseEntity<String> addAlbumToCart(@PathVariable Long userId, @RequestParam Long albumId, @RequestParam int quantity) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found!"));
-        cartService.addAlbumToCart(user, albumId, quantity);
-        return ResponseEntity.ok("Album added to cart!");
-    }
+
 
 }

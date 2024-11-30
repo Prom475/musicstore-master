@@ -10,5 +10,7 @@ import java.util.List;
 @Component
 public interface SongRepository extends JpaRepository<Song, Long> {
     List<Song> findByAlbumId(Long albumId);
+
+    List<Song> findByTitleContainingIgnoreCase(String keyword);
 }
 

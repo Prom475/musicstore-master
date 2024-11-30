@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Melodify Music Store</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/searchResults.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+
+</head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<div class="container">
+    <h1>Search Results</h1>
+    <div th:if="${songs.isEmpty()}">
+        <p>No songs found for your search query.</p>
+    </div>
+    <div class="song-list" th:each="song : ${songs}">
+        <div class="song-card">
+            <img th:src="${song.previewUrl}" alt="Cover Image" class="song-image">
+            <div class="song-info">
+                <h2 th:text="${song.title}">Song Title</h2>
+                         <p th:text="${song.album}">Album</p>
+
+                <!--                <p th:text="${song.artist}">Artist</p>
+                                <p th:text="${song.genre}">Genre</p>
+                                -->
+                                <a th:href="@{'/shoppingCart/addProduct/{id}'(id=${song.id})}" class="btn btn-info" sec:authorize="isAuthenticated()">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer th:replace="fragments/footer :: footer"></footer>
+                </body>
+                </html>

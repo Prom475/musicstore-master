@@ -11,4 +11,9 @@ public class UserController {
     public String userDashboard() {  // Changed method name for clarity
         return "index";
     }
+    //logout
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
 }

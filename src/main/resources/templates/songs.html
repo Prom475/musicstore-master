@@ -1,188 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Songs - Spokyfy Music Store</title>
-    <style>
-        /* Global Styles */
-        body {
-            background-color: black;
-            color: #ffffff;
-            font-family: system-ui, -apple-system, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/songs.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
 
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 2.5em;
-            color: #00FF7F;
-        }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #2b2b2b;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: #00FF7F;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #ffffff;
-        }
-
-        /* Content Styles */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .intro {
-            text-align: center;
-            margin: 30px 0;
-            font-size: 1.2em;
-            color: #b0b0b0;
-        }
-
-        .song-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .song-card {
-            background-color: #161616;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 255, 127, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .song-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 255, 127, 0.2);
-        }
-
-        .song-card h2 {
-            color: #00FF7F;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .song-card p {
-            color: #b0b0b0;
-            margin: 8px 0;
-            font-size: 0.95em;
-        }
-
-        .song-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .song-card audio {
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .actions {
-            margin-top: 10px;
-        }
-
-        .actions a {
-            color: #00FF7F;
-            margin-right: 10px;
-            text-decoration: none;
-        }
-
-        .actions a:hover {
-            color: #ffffff;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #161616;
-            color: #b0b0b0;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-    </style>
 </head>
 <body>
-
-<header>
-    <h1>Melodify Songs</h1>
-</header>
-
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/artists}">Artists</a></li>
-    </ul>
-</nav>
+<div th:replace="/fragments/header :: header"></div>
 
 <div class="container">
-    <div class="intro">
-        <!-- Add Song Link -->
-        <a th:href="@{/songs/add(albumId=${albumId})}" style="color: #00FF7F;">Add a New Song</a>
+    <div class="intro" sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/songs/add(albumId=${albumId})}" class="add-song-button">Add a New Song</a>
     </div>
 
     <div class="song-list">
-        <!-- Song Cards -->
         <div th:each="song : ${songs}" class="song-card">
             <img th:src="${song.previewUrl}" alt="Cover Image">
-
             <h2 th:text="${song.title}">Song Title</h2>
             <p>Duration: <span th:text="${song.duration}">Duration</span></p>
             <p>Price: $<span th:text="${song.price}">Price</span></p>
-
-            <!-- Audio Player -->
             <audio controls th:src="@{${song.audioFile}}">Your browser does not support the audio element.</audio>
-
-            <div class="actions">
-                <!-- Edit and Delete buttons -->
-                <a th:href="@{/songs/edit(songId=${song.id})}">Edit</a>
-                <a th:href="@{/songs/delete(songId=${song.id})}" onclick="return confirm('Are you sure you want to delete this song?');">Delete</a>
-            </div>
-            <!-- Add to Cart Form -->
-            <form method="post" th:action="@{/cart/add}">
-                <input type="hidden" name="itemType" value="SONG" />
-                <input type="hidden" name="itemId" th:value="${song.id}" />
-                <button type="submit">Add to Cart</button>
-            </form>
+         <div class="actions">
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/songs/edit(songId=${song.id})}" class="btn btn-warning">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/songs/delete(songId=${song.id})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this song?');">
+        <i class="fas fa-trash-alt"></i> Delete
+    </a>
+    <a th:href="@{'/shoppingCart/addProduct/{id}'(id=${song.id})}" class="btn btn-info" sec:authorize="isAuthenticated()">
+        <i class="fas fa-cart-plus"></i> Add to Cart
+    </a>
+</div>
         </div>
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2024 Melodify Music Store. All Rights Reserved.</p>
-</footer>
-
+<div th:replace="/fragments/footer :: footer"></div>
 </body>
 </html>

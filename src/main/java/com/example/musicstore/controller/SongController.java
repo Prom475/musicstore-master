@@ -6,6 +6,7 @@ import com.example.musicstore.repository.AlbumRepository;
 import com.example.musicstore.repository.SongRepository;
 import com.example.musicstore.service.FilesStorageService;
 import com.example.musicstore.service.FilesStorageServiceImpl;
+import com.example.musicstore.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class SongController {
     private AlbumRepository albumRepository;
     @Autowired
     private SongRepository songRepository;
+
+    @Autowired
+    private SongService songService;
     @Autowired
     private FilesStorageService filesStorageService;
 
@@ -33,6 +37,13 @@ public class SongController {
         model.addAttribute("songs", songs);
         model.addAttribute("albumId", albumId);
         return "songs";
+    }
+
+    @GetMapping("/search/songs")
+    public String search(@RequestParam("query") String query, Model model) {
+        List<Song> searchResults = songService.searchSongs(query);
+        model.addAttribute("songs", searchResults);
+        return "searchResults";
     }
 
     @GetMapping("/songs/add")

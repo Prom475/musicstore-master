@@ -14,6 +14,8 @@ public class Song {
     private Long id;
     private String title;
     private String duration;
+    @Transient
+    private  String artist;
     private Double price;
     private String previewUrl;
     private String audioFile;

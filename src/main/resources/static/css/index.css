@@ -1,0 +1,184 @@
+
+/* Header Styles */
+header {
+    margin-block: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #333;
+    color: #fff;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 0.5rem;
+    margin-right: 1rem;
+}
+
+.search-button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cart-icon {
+
+    border-radius: 17px;
+    font-size: 1.5rem;
+    color: aquamarine;
+    background: #4caf50;
+    padding: 5px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 0.5rem;
+    margin-right: 1rem;
+}
+
+.search-button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Container Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Intro Section Styles */
+.intro {
+    margin-bottom: 2rem;
+}
+
+.intro a {
+    color: #00FF7F;
+}
+
+/* Album List Styles */
+.album-list {
+    display: flex;
+    gap: 1rem;
+}
+
+.album-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.album-card img {
+    width: 226px;
+    border-radius: 5px;
+}
+
+.album-card h3 {
+    margin: 0.5rem 0;
+}
+
+.album-card p {
+    margin: 0.5rem 0;
+}
+
+.album-card a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.album-card btn{
+    margin-top: 3px;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+#text-intro{
+    font-size: x-large;
+    font-family: cursive;
+    font-style: oblique;
+    font-palette: light;
+    background: linear-gradient(45deg, black, #28a745);
+    color: aliceblue;
+    border: 2px solid;
+    border-radius: 26px;
+    padding: 51px;
+}
